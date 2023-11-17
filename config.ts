@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import Dashboard from "supertokens-node/recipe/dashboard";
 import {RecipeUserId} from "supertokens-node";
 import {getSupabase} from "./utils/supabase";
+import { SupertokensService } from "supertokens-node/recipe/passwordless/smsdelivery"
 
 let supabase_signing_secret = process.env.SUPABASE_SIGNING_SECRET || "RQK5Nw8eW6ylYitnNJo7kGYkBR040TvzF+uQmZ7j4IFOUA0354BkwAIOViAoj5oEy23JwmBBDPel6ZZtomtnZA==";
 
@@ -22,8 +23,8 @@ export function getWebsiteDomain() {
 
 export const SuperTokensConfig: TypeInput = {
     supertokens: {
-        connectionURI: "https://st-dev-df7b6c10-735b-11ee-b7a1-e53a64f212fd.aws.supertokens.io",
-        apiKey: 'GCvNDVW4S2LBClcoeqTJaYra4P',
+        connectionURI: "https://st-prod-287c0250-858e-11ee-8cf3-5d664e22d3f6.aws.supertokens.io",
+        apiKey: 'QqFKsR6j4SnXJtX0D7PPXnZMIH',
         // connectionURI: "https://try.supertokens.com",
     },
     appInfo: {
@@ -35,6 +36,9 @@ export const SuperTokensConfig: TypeInput = {
     // use from SuperTokens. See the full list here: https://supertokens.com/docs/guides
     recipeList: [
         Passwordless.init({
+            smsDelivery: {
+                service: new SupertokensService("B3P6Z6e980ux0=uVynP4aPm41MehU=K8NVWfQ2HdTtjUMSJ0")
+            },
             flowType: "USER_INPUT_CODE",
             contactMethod: "PHONE",
         }),
